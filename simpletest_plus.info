@@ -1,0 +1,6 @@
+name = Testing Plus
+description = Extends core framework for unit and functional testing with additional features.
+core = 7.x
+package = Contrib
+dependencies[] = simpletest
+files[] = drupal_web_test_case_plus.php
