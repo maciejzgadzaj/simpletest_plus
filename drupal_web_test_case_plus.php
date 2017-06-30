@@ -115,6 +115,7 @@ class DrupalWebTestCasePlus extends DrupalWebTestCase {
    */
   protected function tearDown() {
     $this->writeWatchdog();
+    $this->copyDrupalDebug();
     $this->copyCronLog();
 
     parent::tearDown();
@@ -174,6 +175,17 @@ class DrupalWebTestCasePlus extends DrupalWebTestCase {
 
     fputs($index_file, '</table>');
     fclose($index_file);
+  }
+
+  /**
+   * Copies drupal_debug.txt file to simpletest output directory.
+   *
+   * @see tearDown()
+   */
+  protected function copyDrupalDebug() {
+    if (file_exists(file_directory_temp() . '/drupal_debug.txt')) {
+      file_unmanaged_copy(file_directory_temp() . '/drupal_debug.txt', $this->originalFileDirectory . '/simpletest/' . $this->testId . '/');
+    }
   }
 
   /**
